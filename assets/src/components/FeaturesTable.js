@@ -53,7 +53,7 @@ export default class FeaturesTable extends HTMLElement {
         // Sorting attribute and direction
         this.sortingField = this.getAttribute('sortingField');
         const sortingOrder = this.getAttribute('sortingOrder');
-        this.sortingOrder = (sortingOrder !== null && ['asc', 'desc'].includes(sortingOrder)) ? this.sortingField : 'asc';
+        this.sortingOrder = (sortingOrder !== null && ['asc', 'desc'].includes(sortingOrder)) ? sortingOrder : 'asc';
 
         // open popup ?
         this.openPopup = (this.layerConfig && this.layerConfig.popup);
@@ -106,7 +106,7 @@ export default class FeaturesTable extends HTMLElement {
 
                 // If an error occurred, replace empty content with error
                 if (displayExpressions.status != 'success') {
-                    this.querySelector('div.lizmap-features-table-container').innerHTML = `<p style="padding: 3px;">
+                    this.querySelector('table.lizmap-features-table-container').innerHTML = `<p style="padding: 3px;">
                     ${displayExpressions.error}
                     </p>`;
                 }
@@ -176,7 +176,7 @@ export default class FeaturesTable extends HTMLElement {
 
         // If there is not features, add empty content in the container
         if (this.features.length === 0) {
-            this.querySelector('div.lizmap-features-table-container').innerHTML = '&nbsp;';
+            this.querySelector('table.lizmap-features-table-container').innerHTML = '&nbsp;';
         }
 
         // Add drag & drop capabilities if option is set
@@ -204,6 +204,7 @@ export default class FeaturesTable extends HTMLElement {
      * @param {number} lineId Line number of the item in the features table
      */
     onItemClick(event, feature) {
+
         if (!this.openPopup) {return true;}
 
         // Check if the item was active
@@ -213,19 +214,22 @@ export default class FeaturesTable extends HTMLElement {
         const activeItemTitle = `${this.openPopup ? lizDict['featuresTable.item.active.hover']: ''}`;
         const defaultItemTitle = `${this.openPopup ? lizDict['featuresTable.item.hover'] + '.': ''} ${this.itemsDraggable == 'yes' ? lizDict['featuresTable.item.draggable.hover'] + '.' : ''}`;
 
+        // Fix event.target depending on which HTML tag we click on
+        const eventTarget = event.currentTarget;
+
         if (!itemWasActive) {
 
             // Set the features table properties
-            const lineId = parseInt(event.target.dataset.lineId);
+            const lineId = parseInt(eventTarget.dataset.lineId);
             this.activeItemFeatureId = feature.properties.feature_id;
             this.activeItemLineNumber = lineId;
 
             // Get popup data and display it
             mainLizmap.featuresTable.openPopup(
-                event.target.dataset.layerId,
+                eventTarget.dataset.layerId,
                 feature,
                 this.uniqueField,
-                event.target.parentElement.parentElement.querySelector('div.lizmap-features-table-item-popup'),
+                eventTarget.parentElement.parentElement.querySelector('div.lizmap-features-table-item-popup'),
                 function(aLayerId, aFeature, aTarget) {
                     // Add bootstrap classes to the popup tables
                     const popupTable = aTarget.querySelector('table.lizmapPopupTable');
@@ -241,14 +245,14 @@ export default class FeaturesTable extends HTMLElement {
 
                         // Remove popup-displayed for all other items
                         // And restore previous title
-                        var items = featuresTableDiv.querySelectorAll('div.lizmap-features-table-container div.lizmap-features-table-item.popup-displayed');
+                        var items = featuresTableDiv.querySelectorAll('table.lizmap-features-table-container tr.lizmap-features-table-item.popup-displayed');
                         Array.from(items).forEach(item => {
                             item.classList.remove('popup-displayed');
                             item.setAttribute('title', defaultItemTitle);
                         });
 
                         // Add class to the active item
-                        const childSelector = `div.lizmap-features-table-item[data-feature-id="${feature.properties.feature_id}"]`;
+                        const childSelector = `tr.lizmap-features-table-item[data-feature-id="${feature.properties.feature_id}"]`;
                         const activeItem = featuresTableDiv.querySelector(childSelector);
                         if (activeItem) activeItem.classList.add('popup-displayed');
 
@@ -268,9 +272,9 @@ export default class FeaturesTable extends HTMLElement {
             this.activeItemFeatureId = null;
             this.activeItemLineNumber = null;
 
-            event.target.classList.remove('popup-displayed');
-            event.target.setAttribute('title', defaultItemTitle);
-            event.target.closest('div.lizmap-features-table').classList.remove('popup-displayed');
+            eventTarget.classList.remove('popup-displayed');
+            eventTarget.setAttribute('title', defaultItemTitle);
+            eventTarget.closest('div.lizmap-features-table').classList.remove('popup-displayed');
         }
     }
 
@@ -282,7 +286,7 @@ export default class FeaturesTable extends HTMLElement {
      */
     addDragAndDropCapabilities() {
         // Add drag and drop events to table items
-        const items = this.querySelectorAll('div.lizmap-features-table-container div.lizmap-features-table-item');
+        const items = this.querySelectorAll('table.lizmap-features-table-container tr.lizmap-features-table-item');
         if (!items) return;
 
         Array.from(items).forEach(item => {
@@ -359,7 +363,7 @@ export default class FeaturesTable extends HTMLElement {
 
             // Send event
             const movedFeatureId = dropped.dataset.featureId;
-            const newItem = item.parentElement.querySelector(`div.lizmap-features-table-item[data-feature-id="${movedFeatureId}"]`);
+            const newItem = item.parentElement.querySelector(`tr.lizmap-features-table-item[data-feature-id="${movedFeatureId}"]`);
             /**
              * When the user has dropped an item in a new position
              * @event features.table.item.dragged
@@ -407,7 +411,7 @@ export default class FeaturesTable extends HTMLElement {
                         @click=${event => {
                         // Click on the previous item
                         const lineNumber = this.activeItemLineNumber - 1;
-                        const featureDiv = this.querySelector(`div.lizmap-features-table-item[data-line-id="${lineNumber}"]`);
+                        const featureDiv = this.querySelector(`tr.lizmap-features-table-item[data-line-id="${lineNumber}"]`);
                         if (featureDiv) featureDiv.click();
                     }}></button>
                     <button class="btn btn-mini next-popup"
@@ -415,7 +419,7 @@ export default class FeaturesTable extends HTMLElement {
                         @click=${event => {
                         // Click on the next item
                         const lineNumber = this.activeItemLineNumber + 1;
-                        const featureDiv = this.querySelector(`div.lizmap-features-table-item[data-line-id="${lineNumber}"]`);
+                        const featureDiv = this.querySelector(`tr.lizmap-features-table-item[data-line-id="${lineNumber}"]`);
                         if (featureDiv) featureDiv.click();
                     }}></button>
                     <button class="btn btn-mini close-popup"
@@ -423,14 +427,14 @@ export default class FeaturesTable extends HTMLElement {
                         @click=${event => {
                         // Click on the active line to deactivate it
                         if (this.activeItemFeatureId === null) return;
-                        const featureDiv = this.querySelector(`div.lizmap-features-table-item[data-feature-id="${this.activeItemFeatureId}"]`);
+                        const featureDiv = this.querySelector(`tr.lizmap-features-table-item[data-feature-id="${this.activeItemFeatureId}"]`);
                         featureDiv.click();
                     }}></button>
                 </div>
-                <div class="lizmap-features-table-container">
+                <table class="lizmap-features-table-container">
                 ${this.features.map((feature, idx) =>
                     html`
-                    <div
+                    <tr
                         class="lizmap-features-table-item ${this.openPopup ? 'has-action' : ''}"
                         data-layer-id="${this.layerId}"
                         data-feature-id="${feature.properties.feature_id}"
@@ -439,11 +443,16 @@ export default class FeaturesTable extends HTMLElement {
                         @click=${event => {
                             this.onItemClick(event, feature);
                         }}
-                    >${feature.properties.display_expression}
-                    </div>
+                    >
+                        <td 
+                            class="lizmap-features-table-item"
+                        >
+                            ${feature.properties.display_expression}
+                        </td>
+                    </tr>
                     `
                 )}
-                </div>
+                </table>
                 <div class="lizmap-features-table-item-popup"></div>
             </div>
         `;
