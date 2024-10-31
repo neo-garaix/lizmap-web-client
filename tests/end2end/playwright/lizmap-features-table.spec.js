@@ -63,27 +63,14 @@ test.describe('Display lizmap-features-table component in popup from QGIS toolti
         await expect(firstItem).not.toHaveClass(/popup-displayed/);
 
         // Drag and Drop Item
-        await page.locator('table.lizmap-features-table-container').hover({
-            position: {
-                x: 141,
-                y: 257
-            }
-        });
-        await page.mouse.down();
-        await page.locator('table.lizmap-features-table-container').hover({
-            position: {
-                x: 141,
-                y: 12
-            }
-        });
-        await page.mouse.up();
+        await page.locator('.lizmap-features-table-container > tbody > tr:nth-child(2)').dragTo(page.locator('.lizmap-features-table-container > tbody > tr:first-child'));
 
         await expect(firstItem).toHaveAttribute('data-line-id', '1');
-        await expect(firstItem).toHaveAttribute('data-feature-id', '10');
+        await expect(firstItem).toHaveAttribute('data-feature-id', '9');
 
-        let lastItem = lizmapFeaturesTable.locator("table.lizmap-features-table-container tr.lizmap-features-table-item").last();
-        await expect(lastItem).toHaveAttribute('data-line-id', '10');
-        await expect(lastItem).toHaveAttribute('data-feature-id', '8');
+        let secondItem = lizmapFeaturesTable.locator(".lizmap-features-table-container > tbody > tr:nth-child(2)");
+        await expect(secondItem).toHaveAttribute('data-line-id', '2');
+        await expect(secondItem).toHaveAttribute('data-feature-id', '17');
 
 
         //clear screen

@@ -145,7 +145,7 @@ class featuresCtrl extends jController
 
         $expressionColumns = array(
             'date_du_jour' => 'now()',
-            'age_du_capitaine' => "rand(1,10)",
+            'age_du_capitaine' => 'rand(1,10)',
         );
         // Use Lizmap server plugin to evaluate the display expression & feature ID
         $expressions = array(
