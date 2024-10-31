@@ -3611,36 +3611,11 @@ table.lizmap-features-table-container {
   overflow: auto;
 }
 
-/* Feature item */
-table.lizmap-features-table-container tr.lizmap-features-table-item {
-  border-top: 1px solid var(--color-contrasted-elements);
-  position: relative;
-  /* Invert colors on hover & focus */
-  &:hover, &:focus, &:active, &.popup-displayed {
-    background-color: var(--color-contrasted-elements);
-    color: var(--color-contrasted-text);
-  }
-}
 /* Pointer cursor  */
 table.lizmap-features-table-container tr.lizmap-features-table-item.has-action {
   cursor: pointer;
 }
 
-/* Column in feature item row */
-td.lizmap-features-table-item {
-  padding: 5px;
-  border-right: #d7d7d7 solid 1px;
-}
-/* Last column in feature item row */
-td.lizmap-features-table-item:last-child {
-  border-right: none;
-}
-/* All row except head one */
-table.lizmap-features-table-container > tbody > tr {
-  border-left: 1px solid var(--color-contrasted-elements);
-  border-right: 1px solid var(--color-contrasted-elements);
-  border-bottom: 1px solid var(--color-contrasted-elements);
-}
 
 /* Hide other children if only one child feature is active */
 div.lizmap-features-table.popup-displayed table.lizmap-features-table-container tr.lizmap-features-table-item {

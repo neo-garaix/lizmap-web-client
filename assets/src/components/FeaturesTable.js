@@ -439,7 +439,8 @@ export default class FeaturesTable extends HTMLElement {
                         featureDiv.click();
                     }}></button>
                 </div>
-                <table class="lizmap-features-table-container">
+                <table class="table table-sm table-striped table-bordered table table-striped table-bordered lizmap-features-table-container">
+                    ${this.buildLabels()}
                     <tbody>
                         ${this.features.map((feature, idx) =>
                         html`
@@ -505,6 +506,54 @@ export default class FeaturesTable extends HTMLElement {
         } else {
             return html``;
         }
+    }
+
+    buildLabels() {
+        if (this.isColumnsTabEmpty()) {
+            return
+        }
+
+        let result;
+
+        this.columns.forEach(key => {
+            let th = html`
+                <th
+                  class="border lizmap-features-table-item"
+                >
+                    ${key}
+                </th>
+            `;
+            result = html`
+                ${result}
+                ${th}
+            `;
+        });
+
+        if (this.isGeneralLabelExisting()) {
+            // First th to create an empty column for "display_expression"
+            return html`
+                <thead>
+                    <tr class="border-0">
+                        <th class="border-0 lizmap-features-table-item-empty"></th>
+                        ${result}
+                    </tr>
+                </thead>
+            `;
+        } else {
+            return html`
+                <thead>
+                    <tr>
+                        ${result}
+                    </tr>
+                </thead>
+            `;
+        }
+
+
+    }
+
+    isColumnsTabEmpty() {
+        return this.columns.length === 0;
     }
 
     isGeneralLabelExisting() {
