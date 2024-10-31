@@ -143,6 +143,10 @@ class featuresCtrl extends jController
             return $rep;
         }
 
+        $expressionColumns = array(
+            'date_du_jour' => 'now()',
+            'age_du_capitaine' => "rand(1,10)",
+        );
         // Use Lizmap server plugin to evaluate the display expression & feature ID
         $expressions = array(
             // Get feature id
@@ -150,6 +154,7 @@ class featuresCtrl extends jController
             // Get display expression
             'display_expression' => 'display_expression()',
         );
+        $expressions = array_merge($expressions, $expressionColumns);
 
         // Filter
         $exp_filter = trim($this->param('exp_filter', 'FALSE'));
@@ -176,6 +181,7 @@ class featuresCtrl extends jController
         $content = array(
             'status' => 'success',
             'data' => $getDisplayExpressions,
+            'expressionColumns' => $expressionColumns,
             'error' => null,
         );
         $rep->data = $content;

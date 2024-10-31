@@ -65,6 +65,9 @@ export default class FeaturesTable extends HTMLElement {
         // Features
         this.features = [];
 
+        // Columns
+        this.columns = [];
+
         // Clicked item feature ID
         this.activeItemFeatureId = null;
 
@@ -94,6 +97,11 @@ export default class FeaturesTable extends HTMLElement {
 
                     // Set component data property
                     this.features = displayExpressions.data;
+
+                    // Set columns
+                    Object.keys(displayExpressions.expressionColumns).forEach(key => {
+                        this.columns.push(key)
+                    });
 
                     // Sort data if needed
                     if (this.features.length > 1) {
@@ -229,7 +237,7 @@ export default class FeaturesTable extends HTMLElement {
                 eventTarget.dataset.layerId,
                 feature,
                 this.uniqueField,
-                eventTarget.parentElement.parentElement.querySelector('div.lizmap-features-table-item-popup'),
+                eventTarget.parentElement.parentElement.parentElement.querySelector('div.lizmap-features-table-item-popup'),
                 function(aLayerId, aFeature, aTarget) {
                     // Add bootstrap classes to the popup tables
                     const popupTable = aTarget.querySelector('table.lizmapPopupTable');
@@ -432,26 +440,24 @@ export default class FeaturesTable extends HTMLElement {
                     }}></button>
                 </div>
                 <table class="lizmap-features-table-container">
-                ${this.features.map((feature, idx) =>
-                    html`
-                    <tr
-                        class="lizmap-features-table-item ${this.openPopup ? 'has-action' : ''}"
-                        data-layer-id="${this.layerId}"
-                        data-feature-id="${feature.properties.feature_id}"
-                        data-line-id="${idx+1}"
-                        title="${this.openPopup ? lizDict['featuresTable.item.hover'] + '.': ''} ${this.itemsDraggable == 'yes' ? lizDict['featuresTable.item.draggable.hover'] + '.' : ''}"
-                        @click=${event => {
-                            this.onItemClick(event, feature);
-                        }}
-                    >
-                        <td 
-                            class="lizmap-features-table-item"
+                    <tbody>
+                        ${this.features.map((feature, idx) =>
+                        html`
+                        <tr
+                            class="lizmap-features-table-item ${this.openPopup ? 'has-action' : ''}"
+                            data-layer-id="${this.layerId}"
+                            data-feature-id="${feature.properties.feature_id}"
+                            data-line-id="${idx+1}"
+                            title="${this.openPopup ? lizDict['featuresTable.item.hover'] + '.': ''} ${this.itemsDraggable == 'yes' ? lizDict['featuresTable.item.draggable.hover'] + '.' : ''}"
+                            @click=${event => {
+                                this.onItemClick(event, feature);
+                            }}
                         >
-                            ${feature.properties.display_expression}
-                        </td>
-                    </tr>
-                    `
-                )}
+                            ${this.buildColumns(feature.properties)}
+                        </tr>
+                        `
+                        )}
+                    </tbody>
                 </table>
                 <div class="lizmap-features-table-item-popup"></div>
             </div>
@@ -459,6 +465,50 @@ export default class FeaturesTable extends HTMLElement {
 
         // Load
         this.load();
+    }
+
+    buildColumns(properties) {
+
+        let result = html`
+                ${this.buildDisplayExpressionColumn(properties)}
+            `;
+
+        this.columns.forEach(key => {
+            let td = html`
+                <td
+                  class="lizmap-features-table-item"
+                >
+                    ${properties[key]}
+                </td>
+            `;
+            result = html`
+                ${result}
+                ${td}
+            `;
+        });
+
+        return result;
+    }
+
+    /**
+     * Initialize tab with the first column "display_expression"
+     * @param {object} properties - Object containing the properties of the feature
+     * @returns {TemplateResult<1>}
+     */
+    buildDisplayExpressionColumn(properties) {
+        if (this.isGeneralLabelExisting()) {
+            return html`
+                <td class="lizmap-features-table-item">
+                    ${properties.display_expression}
+                </td>
+            `;
+        } else {
+            return html``;
+        }
+    }
+
+    isGeneralLabelExisting() {
+        return this.features[0].properties.hasOwnProperty('display_expression');
     }
 
     static get observedAttributes() { return ['updated']; }

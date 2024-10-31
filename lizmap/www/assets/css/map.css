@@ -3604,7 +3604,6 @@ div.lizmap-features-table {
   position: relative;
 }
 table.lizmap-features-table-container {
-  border: 1px solid var(--color-contrasted-elements);
   font-size: 0.9em;
   margin: 0px 10px 0px 10px;
   position: relative;
@@ -3616,15 +3615,10 @@ table.lizmap-features-table-container {
 table.lizmap-features-table-container tr.lizmap-features-table-item {
   border-top: 1px solid var(--color-contrasted-elements);
   position: relative;
-  display: block;
   /* Invert colors on hover & focus */
   &:hover, &:focus, &:active, &.popup-displayed {
-      background-color: var(--color-contrasted-elements);
-      color: var(--color-contrasted-text);
-  }
-  /* Do not render the top border for the first item (parent already has a border) */
-  &:first-child {
-    border-top: none;
+    background-color: var(--color-contrasted-elements);
+    color: var(--color-contrasted-text);
   }
 }
 /* Pointer cursor  */
@@ -3635,6 +3629,17 @@ table.lizmap-features-table-container tr.lizmap-features-table-item.has-action {
 /* Column in feature item row */
 td.lizmap-features-table-item {
   padding: 5px;
+  border-right: #d7d7d7 solid 1px;
+}
+/* Last column in feature item row */
+td.lizmap-features-table-item:last-child {
+  border-right: none;
+}
+/* All row except head one */
+table.lizmap-features-table-container > tbody > tr {
+  border-left: 1px solid var(--color-contrasted-elements);
+  border-right: 1px solid var(--color-contrasted-elements);
+  border-bottom: 1px solid var(--color-contrasted-elements);
 }
 
 /* Hide other children if only one child feature is active */
@@ -3643,9 +3648,8 @@ div.lizmap-features-table.popup-displayed table.lizmap-features-table-container 
 }
 /* In this context, display only the active child item */
 div.lizmap-features-table.popup-displayed table.lizmap-features-table-container tr.lizmap-features-table-item.popup-displayed {
-  display: block;
-}
-/* Toolbar visible when popup is visible */
+  display: revert;
+}/* Toolbar visible when popup is visible */
 div.lizmap-features-table div.lizmap-features-table-toolbar {
   display: none;
 }
