@@ -156,10 +156,11 @@ class qgisExpressionUtils
      * @param string          $filter        A filter to restrict virtual fields creation
      * @param string          $withGeometry  'true' to get geometries of features
      * @param string          $fields        A list of field names separated by comma. E.g. 'name,code'
+     * @param string          $limit         The maximum number of features to return
      *
      * @return null|array the features with virtual fields
      */
-    public static function virtualFields($layer, $virtualFields, $filter = null, $withGeometry = 'true', $fields = '')
+    public static function virtualFields($layer, $virtualFields, $filter = null, $withGeometry = 'true', $fields = '', $limit = '')
     {
         // Evaluate the expression by qgis
         $project = $layer->getProject();
@@ -171,6 +172,7 @@ class qgisExpressionUtils
             'virtuals' => json_encode($virtualFields),
             'with_geometry' => $withGeometry,
             'fields' => $fields,
+            'limit' => $limit,
         );
         if ($filter) {
             $params['filter'] = $filter;

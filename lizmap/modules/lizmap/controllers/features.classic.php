@@ -170,13 +170,17 @@ class featuresCtrl extends jController
 
         $expressions = array_merge($expressions, $additionalFields);
 
+        // Limit
+        $limit = trim($this->param('limit', ''));
+
         // Get the evaluated features for the given layer and parameters
         $getDisplayExpressions = qgisExpressionUtils::virtualFields(
             $qgisLayer,
             $expressions,
             $exp_filter,
             $withGeometry,
-            $fields
+            $fields,
+            $limit
         );
 
         // If the returned content is null, an error occurred

@@ -33,13 +33,14 @@ export default class FeaturesTable {
      * @param {boolean}     withGeometry If we need to get the geometry
      * @param {string|null} fields List of field names separated by comma
      * @param {object|array} additionalFields JSON object with the field names and expressions
+     * @param {string}      limit Number of features to return
      *
      * @returns — A Promise that resolves with the result of parsing the response body text as JSON.
      * @throws {ResponseError} In case of invalid content type (not application/json or application/vnd.geo+json) or Invalid JSON
      * @throws {HttpError} In case of not successful response (status not in the range 200 – 299)
      * @throws {NetworkError} In case of catch exceptions
      */
-    getFeatures(layerId, filter = null, withGeometry = false, fields = 'null', additionalFields = []) {
+    getFeatures(layerId, filter = null, withGeometry = false, fields = 'null', additionalFields = [], limit = '') {
 
         // Build URL
         const url = `${lizUrls.service.replace('service?','features/displayExpression?')}&`;
@@ -51,6 +52,7 @@ export default class FeaturesTable {
         formData.append('with_geometry', withGeometry.toString());
         formData.append('fields', fields);
         formData.append('additionalFields',JSON.stringify(additionalFields));
+        formData.append('limit', limit);
         // Return promise
         return Utils.fetchJSON(url, {
             method: "POST",

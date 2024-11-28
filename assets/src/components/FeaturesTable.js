@@ -82,6 +82,9 @@ export default class FeaturesTable extends HTMLElement {
 
         // Clicked item line number
         this.activeItemLineNumber = null;
+
+        // Limit
+        this.limit = 1000;
     }
 
     /**
@@ -105,7 +108,7 @@ export default class FeaturesTable extends HTMLElement {
             });
         }
         // Get the features corresponding to the given parameters from attributes
-        mainLizmap.featuresTable.getFeatures(this.layerId, this.expressionFilter, this.withGeometry, fields, uniqueAdditionalFields)
+        mainLizmap.featuresTable.getFeatures(this.layerId, this.expressionFilter, this.withGeometry, fields, uniqueAdditionalFields, this.limit)
             .then(displayExpressions => {
                 // Check for errors
                 if (!('status' in displayExpressions)) return;
