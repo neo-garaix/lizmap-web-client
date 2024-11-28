@@ -60,9 +60,11 @@ export default class FeaturesTable extends HTMLElement {
         this.withGeometry = this.hasAttribute('withGeometry');
 
         // Sorting attribute and direction
-        this.sortingField = this.getAttribute('sortingField');
         const sortingOrder = this.getAttribute('sortingOrder');
-        this.sortingOrder = (sortingOrder !== null && ['asc', 'desc'].includes(sortingOrder.toLowerCase())) ? sortingOrder : 'asc';
+        this.sorting = [
+            (sortingOrder !== null && ['asc', 'desc'].includes(sortingOrder.toLowerCase())) ? sortingOrder : 'asc',
+            this.getAttribute('sortingField'),
+        ];
 
         // open popup ?
         this.openPopup = (this.layerConfig && this.layerConfig.popup);
@@ -93,8 +95,8 @@ export default class FeaturesTable extends HTMLElement {
     async load() {
         // Build needed fields
         let fields = `${this.uniqueField}`;
-        if (this.sortingField) {
-            fields += ',' + this.sortingField;
+        if (this.sorting.field) {
+            fields += ',' + this.sorting.field;
         }
 
         let uniqueAdditionalFields = [];
@@ -108,7 +110,7 @@ export default class FeaturesTable extends HTMLElement {
             });
         }
         // Get the features corresponding to the given parameters from attributes
-        mainLizmap.featuresTable.getFeatures(this.layerId, this.expressionFilter, this.withGeometry, fields, uniqueAdditionalFields, this.limit)
+        mainLizmap.featuresTable.getFeatures(this.layerId, this.expressionFilter, this.withGeometry, fields, uniqueAdditionalFields, this.limit, this.sorting)
             .then(displayExpressions => {
                 // Check for errors
                 if (!('status' in displayExpressions)) return;
@@ -116,14 +118,8 @@ export default class FeaturesTable extends HTMLElement {
                 if (displayExpressions.status != 'success') {
                     console.error(displayExpressions.error);
                 } else {
-
                     // Set component data property
                     this.features = displayExpressions.data;
-
-                    // Sort data if needed
-                    if (this.features.length > 1) {
-                        this.sortFeatures();
-                    }
                 }
 
                 // Render

@@ -170,6 +170,15 @@ class featuresCtrl extends jController
 
         $expressions = array_merge($expressions, $additionalFields);
 
+        // Sorting
+        try {
+            $sorting = json_decode($this->param('sorting', null), true);
+        } catch (\Exception $e) {
+            $content['error'] = 'An error occured while decoding the sorting parameter !';
+            $rep->data = $content;
+            return $rep;
+        }
+
         // Limit
         $limit = trim($this->param('limit', ''));
 
@@ -180,7 +189,8 @@ class featuresCtrl extends jController
             $exp_filter,
             $withGeometry,
             $fields,
-            $limit
+            $limit,
+            $sorting
         );
 
         // If the returned content is null, an error occurred
