@@ -266,6 +266,22 @@ export default class FeaturesTable extends HTMLElement {
             this.activeItemFeatureId = feature.properties.feature_id;
             this.activeItemLineNumber = lineId;
 
+            /**
+             * When the user has clicked an item
+             * @event features.table.item.isclicked
+             * @property {string} layerId The layer ID of the selected item
+             * @property {string} feature The feature that contains data on the clicked item
+             * @property {string} uniqueField The unique field of the selected item
+             * @property {string} targetElement The target element where to insert the popup
+             */
+            mainEventDispatcher.dispatch({
+                type: 'features.table.item.isclicked',
+                layerId: eventTarget.dataset.layerId,
+                feature: feature,
+                uniqueField: this.uniqueField,
+                targetElement: eventTarget.parentElement.parentElement.parentElement.querySelector('div.lizmap-features-table-item-popup'),
+            });
+
             // Get popup data and display it
             mainLizmap.featuresTable.openPopup(
                 eventTarget.dataset.layerId,
