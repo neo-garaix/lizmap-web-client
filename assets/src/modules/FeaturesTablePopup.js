@@ -16,9 +16,10 @@ const DOCK_DESCRIPTION = 'You can view the current item clicked.';
 // Sentence used when no click has been made on the map yet
 const DOCK_PLEASE_CLICK = 'Please click on the map to get the item you want to show.';
 
-// ---------------------------
-// DO NOT EDIT AFTER THIS LINE
-// ---------------------------
+// -------------------------------------*
+// DO NOT EDIT AFTER THIS LINE          |
+// IMPORT IN Lizmap.js in order to test |
+// -------------------------------------*
 
 // Object used to store information o create the popup
 let popupObject = {
@@ -252,7 +253,7 @@ async function getParams(event) {
             layerId: selector.getAttribute('layerid'),
             uniqueField: selector.getAttribute('uniquefield'),
             expressionFilter: selector.getAttribute('expressionfilter'),
-            withGeometry: (selector.getAttribute('withgeometry') === "1"), // TODO: à changer
+            withGeometry: (selector.getAttribute('withgeometry') === "1"),
             sortingField: selector.getAttribute('sortingfield'),
             sortingOrder: selector.getAttribute('sortingorder'),
             fields: [],
@@ -316,10 +317,7 @@ async function onMapClick(event) {
                         console.error(e);
                     }
                 } else {
-                    // TODO: NON FONCTIONNEL
-                    console.log(data);
-                    // Check if the feature is in the extent of the click
-                    comparator = lizMap.ol.extent.containsCoordinate(data.bbox, event.coordinate);
+                    // TODO: NON FOCTIONNEL
                 }
 
                 // If the feature is found, store it and break the loop
