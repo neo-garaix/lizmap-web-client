@@ -196,7 +196,7 @@ jobs:
       - name: Install dependencies
 #        if: steps.cache-npm-restore.outputs.cache-hit != 'true'
         run: |
-          cd end2end
+          cd ..
           npm ci
 
       - name: Install Playwright
