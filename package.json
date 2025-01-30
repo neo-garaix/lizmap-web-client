@@ -1,0 +1,24 @@
+{
+  "name": "lizmap-web-client",
+  "version": "1.0.0",
+  "description": "Lizmap Web Client",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-plugin-jsdoc": "^48.0.2"
+  },
+  "scripts": {
+    "pretest": "eslint assets/src",
+    "pretest-fix": "eslint --fix assets/src"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "assets",
+    "tests/js-units",
+    "tests/end2end"
+  ]
+}
