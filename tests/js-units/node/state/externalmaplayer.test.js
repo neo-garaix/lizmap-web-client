@@ -2,17 +2,17 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { LayerTreeGroupConfig, buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
-import { LayersAndGroupsCollection } from '../../../../assets/src/modules/state/Layer.js';
-import { base64svg, base64svgOlLayer, base64svgRasterLayer } from '../../../../assets/src/modules/state/Symbology.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerTreeGroupConfig, buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
+import { LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { base64svg, base64svgOlLayer, base64svgRasterLayer } from 'assets/src/modules/state/Symbology.js';
 
-import { MapGroupState, MapRootState } from '../../../../assets/src/modules/state/MapLayer.js';
-import { ExternalMapGroupState, OlMapLayerState } from '../../../../assets/src/modules/state/ExternalMapLayer.js';
-import { OptionsConfig } from '../../../../assets/src/modules/config/Options.js';
+import { MapGroupState, MapRootState } from 'assets/src/modules/state/MapLayer.js';
+import { ExternalMapGroupState, OlMapLayerState } from 'assets/src/modules/state/ExternalMapLayer.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
 
-import { default as ol } from '../../../../assets/src/dependencies/ol.js';
+import { default as ol } from 'assets/src/dependencies/ol.js';
 
 /**
  * Returns the root MapGroupState for the project

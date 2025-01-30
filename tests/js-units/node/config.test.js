@@ -2,18 +2,18 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { ValidationError } from '../../../assets/src/modules/Errors.js';
-import { Config } from '../../../assets/src/modules/Config.js';
-import { OptionsConfig } from '../../../assets/src/modules/config/Options.js';
-import { LayersConfig } from '../../../assets/src/modules/config/Layer.js';
-import { LayerTreeGroupConfig } from '../../../assets/src/modules/config/LayerTree.js';
-import { BaseLayersConfig } from '../../../assets/src/modules/config/BaseLayer.js';
-import { MetadataConfig } from '../../../assets/src/modules/config/Metadata.js';
-import { LocateByLayerConfig } from '../../../assets/src/modules/config/Locate.js';
-import { AttributeLayersConfig } from '../../../assets/src/modules/config/AttributeTable.js';
-import { TooltipLayersConfig } from '../../../assets/src/modules/config/Tooltip.js';
-import { ThemesConfig } from '../../../assets/src/modules/config/Theme.js';
-import { DatavizLayersConfig, DatavizOptionsConfig } from '../../../assets/src/modules/config/Dataviz.js';
+import { ValidationError } from 'assets/src/modules/Errors.js';
+import { Config } from 'assets/src/modules/Config.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerTreeGroupConfig } from 'assets/src/modules/config/LayerTree.js';
+import { BaseLayersConfig } from 'assets/src/modules/config/BaseLayer.js';
+import { MetadataConfig } from 'assets/src/modules/config/Metadata.js';
+import { LocateByLayerConfig } from 'assets/src/modules/config/Locate.js';
+import { AttributeLayersConfig } from 'assets/src/modules/config/AttributeTable.js';
+import { TooltipLayersConfig } from 'assets/src/modules/config/Tooltip.js';
+import { ThemesConfig } from 'assets/src/modules/config/Theme.js';
+import { DatavizLayersConfig, DatavizOptionsConfig } from 'assets/src/modules/config/Dataviz.js';
 
 
 describe('Config', function () {

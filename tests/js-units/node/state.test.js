@@ -2,14 +2,14 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { Config } from '../../../assets/src/modules/Config.js';
-import { MapState } from '../../../assets/src/modules/state/Map.js';
-import { BaseLayersState } from '../../../assets/src/modules/state/BaseLayer.js';
-import { LayersAndGroupsCollection } from '../../../assets/src/modules/state/Layer.js';
-import { MapGroupState, MapLayerState } from '../../../assets/src/modules/state/MapLayer.js';
-import { LayerTreeGroupState } from '../../../assets/src/modules/state/LayerTree.js';
+import { Config } from 'assets/src/modules/Config.js';
+import { MapState } from 'assets/src/modules/state/Map.js';
+import { BaseLayersState } from 'assets/src/modules/state/BaseLayer.js';
+import { LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { MapGroupState, MapLayerState } from 'assets/src/modules/state/MapLayer.js';
+import { LayerTreeGroupState } from 'assets/src/modules/state/LayerTree.js';
 
-import { State } from '../../../assets/src/modules/State.js';
+import { State } from 'assets/src/modules/State.js';
 
 describe('State', function () {
 

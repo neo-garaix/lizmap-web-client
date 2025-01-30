@@ -2,14 +2,14 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { LayerTreeGroupConfig, buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { BaseLayerTypes, BaseLayerConfig, EmptyBaseLayerConfig, BaseLayersConfig } from '../../../../assets/src/modules/config/BaseLayer.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
-import { LayersAndGroupsCollection } from '../../../../assets/src/modules/state/Layer.js';
-import { OptionsConfig } from '../../../../assets/src/modules/config/Options.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerTreeGroupConfig, buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { BaseLayerTypes, BaseLayerConfig, EmptyBaseLayerConfig, BaseLayersConfig } from 'assets/src/modules/config/BaseLayer.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
+import { LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
 
-import { BaseLayerState, EmptyBaseLayerState, BaseLayersState } from '../../../../assets/src/modules/state/BaseLayer.js';
+import { BaseLayerState, EmptyBaseLayerState, BaseLayersState } from 'assets/src/modules/state/BaseLayer.js';
 
 /**
  * Returns the BaseLayersState for the project

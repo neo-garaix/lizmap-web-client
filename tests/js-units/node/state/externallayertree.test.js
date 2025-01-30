@@ -2,18 +2,18 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { LayerTreeGroupConfig, buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
-import { LayersAndGroupsCollection } from '../../../../assets/src/modules/state/Layer.js';
-import { MapGroupState, MapRootState } from '../../../../assets/src/modules/state/MapLayer.js';
-import { base64svg, base64svgOlLayer, base64svgRasterLayer } from '../../../../assets/src/modules/state/Symbology.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerTreeGroupConfig, buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
+import { LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { MapGroupState, MapRootState } from 'assets/src/modules/state/MapLayer.js';
+import { base64svg, base64svgOlLayer, base64svgRasterLayer } from 'assets/src/modules/state/Symbology.js';
 
-import { LayerTreeGroupState, TreeRootState } from '../../../../assets/src/modules/state/LayerTree.js';
-import { ExternalLayerTreeGroupState, OlTreeLayerState } from '../../../../assets/src/modules/state/ExternalLayerTree.js';
-import { OptionsConfig } from '../../../../assets/src/modules/config/Options.js';
+import { LayerTreeGroupState, TreeRootState } from 'assets/src/modules/state/LayerTree.js';
+import { ExternalLayerTreeGroupState, OlTreeLayerState } from 'assets/src/modules/state/ExternalLayerTree.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
 
-import { default as ol } from '../../../../assets/src/dependencies/ol.js';
+import { default as ol } from 'assets/src/dependencies/ol.js';
 
 /**
  * Returns the root LayerTreeGroupState for the project

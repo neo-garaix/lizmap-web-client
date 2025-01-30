@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { deepFreeze, getNotContains } from '../../../../assets/src/modules/config/Tools.js';
+import { deepFreeze, getNotContains } from 'assets/src/modules/config/Tools.js';
 
 describe('deepFreeze', function () {
     it('Valid', function () {

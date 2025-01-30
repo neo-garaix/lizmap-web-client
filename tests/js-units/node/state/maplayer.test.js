@@ -2,15 +2,15 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { ValidationError, ConversionError } from '../../../../assets/src/modules/Errors.js';
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { LayerGeographicBoundingBoxConfig, LayerBoundingBoxConfig, LayerTreeGroupConfig, buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
-import { LayerIconSymbology, LayerSymbolsSymbology, SymbolIconSymbology } from '../../../../assets/src/modules/state/Symbology.js';
-import { LayerGroupState, LayerVectorState, LayersAndGroupsCollection } from '../../../../assets/src/modules/state/Layer.js';
-import { OptionsConfig } from '../../../../assets/src/modules/config/Options.js';
+import { ValidationError, ConversionError } from 'assets/src/modules/Errors.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerGeographicBoundingBoxConfig, LayerBoundingBoxConfig, LayerTreeGroupConfig, buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
+import { LayerIconSymbology, LayerSymbolsSymbology, SymbolIconSymbology } from 'assets/src/modules/state/Symbology.js';
+import { LayerGroupState, LayerVectorState, LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
 
-import { MapLayerLoadStatus, MapGroupState, MapLayerState, MapRootState } from '../../../../assets/src/modules/state/MapLayer.js';
+import { MapLayerLoadStatus, MapGroupState, MapLayerState, MapRootState } from 'assets/src/modules/state/MapLayer.js';
 
 /**
  * Returns the root MapGroupState for the project

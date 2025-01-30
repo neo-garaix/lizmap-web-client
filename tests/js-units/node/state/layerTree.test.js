@@ -2,19 +2,19 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { ConversionError } from '../../../../assets/src/modules/Errors.js';
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { LayerTreeGroupConfig, buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { base64png, base64svg, base64svgPointLayer, base64svgLineLayer, base64svgPolygonLayer, base64svgRasterLayer, base64svgOlLayer, BaseIconSymbology, LayerIconSymbology, LayerSymbolsSymbology, SymbolIconSymbology } from '../../../../assets/src/modules/state/Symbology.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
-import { LayersAndGroupsCollection } from '../../../../assets/src/modules/state/Layer.js';
-import { MapLayerLoadStatus, MapGroupState, MapRootState } from '../../../../assets/src/modules/state/MapLayer.js';
+import { ConversionError } from 'assets/src/modules/Errors.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { LayerTreeGroupConfig, buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { base64png, base64svg, base64svgPointLayer, base64svgLineLayer, base64svgPolygonLayer, base64svgRasterLayer, base64svgOlLayer, BaseIconSymbology, LayerIconSymbology, LayerSymbolsSymbology, SymbolIconSymbology } from 'assets/src/modules/state/Symbology.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
+import { LayersAndGroupsCollection } from 'assets/src/modules/state/Layer.js';
+import { MapLayerLoadStatus, MapGroupState, MapRootState } from 'assets/src/modules/state/MapLayer.js';
 
-import { LayerTreeGroupState, LayerTreeLayerState, TreeRootState } from '../../../../assets/src/modules/state/LayerTree.js';
-import { ExternalLayerTreeGroupState } from '../../../../assets/src/modules/state/ExternalLayerTree.js';
-import { OptionsConfig } from '../../../../assets/src/modules/config/Options.js';
+import { LayerTreeGroupState, LayerTreeLayerState, TreeRootState } from 'assets/src/modules/state/LayerTree.js';
+import { ExternalLayerTreeGroupState } from 'assets/src/modules/state/ExternalLayerTree.js';
+import { OptionsConfig } from 'assets/src/modules/config/Options.js';
 
-import { default as ol } from '../../../../assets/src/dependencies/ol.js';
+import { default as ol } from 'assets/src/dependencies/ol.js';
 
 /**
  * Returns the root LayerTreeGroupState for the project

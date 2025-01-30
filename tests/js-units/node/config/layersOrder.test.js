@@ -2,9 +2,9 @@ import { expect } from 'chai';
 
 import { readFileSync } from 'fs';
 
-import { LayersConfig } from '../../../../assets/src/modules/config/Layer.js';
-import { buildLayerTreeConfig } from '../../../../assets/src/modules/config/LayerTree.js';
-import { buildLayersOrder } from '../../../../assets/src/modules/config/LayersOrder.js';
+import { LayersConfig } from 'assets/src/modules/config/Layer.js';
+import { buildLayerTreeConfig } from 'assets/src/modules/config/LayerTree.js';
+import { buildLayersOrder } from 'assets/src/modules/config/LayersOrder.js';
 
 describe('buildLayersOrder', function () {
     it('From config', function () {
