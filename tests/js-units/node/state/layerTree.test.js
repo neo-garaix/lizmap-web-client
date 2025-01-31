@@ -28,10 +28,10 @@ import { default as ol } from 'assets/src/dependencies/ol.js';
  * @return {LayerTreeGroupState}
  **/
 function getRootLayerTreeGroupState(name) {
-    const capabilities = JSON.parse(readFileSync('./data/'+ name +'-capabilities.json', 'utf8'));
+    const capabilities = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-capabilities.json', 'utf8'));
     expect(capabilities).to.not.be.undefined
     expect(capabilities.Capability).to.not.be.undefined
-    const config = JSON.parse(readFileSync('./data/'+ name +'-config.json', 'utf8'));
+    const config = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-config.json', 'utf8'));
     expect(config).to.not.be.undefined
 
     const layers = new LayersConfig(config.layers);
@@ -871,7 +871,7 @@ describe('LayerTreeGroupState', function () {
         const root = getRootLayerTreeGroupState('montpellier')
         expect(root).to.be.instanceOf(LayerTreeGroupState)
 
-        const legend = JSON.parse(readFileSync('./data/montpellier-legend.json', 'utf8'));
+        const legend = JSON.parse(readFileSync('./tests/js-units/data/montpellier-legend.json', 'utf8'));
         expect(legend).to.not.be.undefined
 
         const sousquartiers = root.children[2];

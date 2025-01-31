@@ -168,10 +168,10 @@ describe('LayerTreeItemConfig', function () {
 
 describe('buildLayerTreeConfig', function () {
     it('Montpellier', function () {
-        const capabilities = JSON.parse(readFileSync('./data/montpellier-capabilities.json', 'utf8'));
+        const capabilities = JSON.parse(readFileSync('./tests/js-units/data/montpellier-capabilities.json', 'utf8'));
         expect(capabilities).to.not.be.undefined
         expect(capabilities.Capability).to.not.be.undefined
-        const config = JSON.parse(readFileSync('./data/montpellier-config.json', 'utf8'));
+        const config = JSON.parse(readFileSync('./tests/js-units/data/montpellier-config.json', 'utf8'));
         expect(config).to.not.be.undefined
 
         const layers = new LayersConfig(config.layers);
@@ -293,10 +293,10 @@ describe('buildLayerTreeConfig', function () {
     })
 
     it('Backgrounds', function () {
-      const capabilities = JSON.parse(readFileSync('./data/backgrounds-capabilities.json', 'utf8'));
+      const capabilities = JSON.parse(readFileSync('./tests/js-units/data/backgrounds-capabilities.json', 'utf8'));
       expect(capabilities).to.not.be.undefined
       expect(capabilities.Capability).to.not.be.undefined
-      const config = JSON.parse(readFileSync('./data/backgrounds-config.json', 'utf8'));
+      const config = JSON.parse(readFileSync('./tests/js-units/data/backgrounds-config.json', 'utf8'));
       expect(config).to.not.be.undefined
 
       const layers = new LayersConfig(config.layers);

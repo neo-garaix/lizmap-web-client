@@ -374,7 +374,7 @@ describe('LayerSymbolsSymbology', function () {
     })
 
     it('RuleRenderer', function () {
-        const legend = JSON.parse(readFileSync('./data/quickosm-road-legend.json', 'utf8'));
+        const legend = JSON.parse(readFileSync('./tests/js-units/data/quickosm-road-legend.json', 'utf8'));
         expect(legend).to.not.be.undefined
         expect(legend.nodes).to.be.an('array').that.have.length(1)
 

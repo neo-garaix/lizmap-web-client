@@ -2,15 +2,6 @@
   "name": "js-test",
   "description": "Unit Test Lizmap JavaScript",
   "type": "module",
-  "scripts": {
-    "js:test": "mocha --recursive node"
-  },
   "author": "3Liz",
-  "dependencies": {
-    "mocha": "^10.0.0",
-    "undici": "^6.21.1"
-  },
-  "devDependencies": {
-    "chai": "^4.3.6"
-  }
+  "license": "ISC"
 }

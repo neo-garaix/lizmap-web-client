@@ -24,10 +24,10 @@ import { OptionsConfig } from 'assets/src/modules/config/Options.js';
  * @return {LayerGroupState}
  **/
 function getRootLayerGroupState(name) {
-    const capabilities = JSON.parse(readFileSync('./data/'+ name +'-capabilities.json', 'utf8'));
+    const capabilities = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-capabilities.json', 'utf8'));
     expect(capabilities).to.not.be.undefined
     expect(capabilities.Capability).to.not.be.undefined
-    const config = JSON.parse(readFileSync('./data/'+ name +'-config.json', 'utf8'));
+    const config = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-config.json', 'utf8'));
     expect(config).to.not.be.undefined
 
     const layers = new LayersConfig(config.layers);
@@ -55,10 +55,10 @@ function getRootLayerGroupState(name) {
  * @return {LayersAndGroupsCollection}
  **/
 function getLayersAndGroupsCollection(name) {
-    const capabilities = JSON.parse(readFileSync('./data/'+ name +'-capabilities.json', 'utf8'));
+    const capabilities = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-capabilities.json', 'utf8'));
     expect(capabilities).to.not.be.undefined
     expect(capabilities.Capability).to.not.be.undefined
-    const config = JSON.parse(readFileSync('./data/'+ name +'-config.json', 'utf8'));
+    const config = JSON.parse(readFileSync('./tests/js-units/data/'+ name +'-config.json', 'utf8'));
     expect(config).to.not.be.undefined
 
     const layers = new LayersConfig(config.layers);
@@ -989,7 +989,7 @@ describe('LayerGroupState', function () {
             fondSymbologyChangedEvt = evt
         }, 'layer.symbology.changed');
 
-        const legend = JSON.parse(readFileSync('./data/cadastre-caen-fond-legend.json', 'utf8'));
+        const legend = JSON.parse(readFileSync('./tests/js-units/data/cadastre-caen-fond-legend.json', 'utf8'));
         expect(legend).to.not.be.undefined
 
         // Set symbology
@@ -1658,10 +1658,10 @@ describe('LayersAndGroupsCollection', function () {
     })
 
     it('Empty group as group', function () {
-        const capabilities = JSON.parse(readFileSync('./data/display-in-legend-capabilities.json', 'utf8'));
+        const capabilities = JSON.parse(readFileSync('./tests/js-units/data/display-in-legend-capabilities.json', 'utf8'));
         expect(capabilities).to.not.be.undefined
         expect(capabilities.Capability).to.not.be.undefined
-        const config = JSON.parse(readFileSync('./data/display-in-legend-config.json', 'utf8'));
+        const config = JSON.parse(readFileSync('./tests/js-units/data/display-in-legend-config.json', 'utf8'));
         expect(config).to.not.be.undefined
 
         // `group-without-children` has a config
@@ -2044,7 +2044,7 @@ describe('LayersAndGroupsCollection', function () {
             sousquartiersSymbologyChangedEvt = evt
         }, 'layer.symbology.changed');
 
-        const legend = JSON.parse(readFileSync('./data/montpellier-legend.json', 'utf8'));
+        const legend = JSON.parse(readFileSync('./tests/js-units/data/montpellier-legend.json', 'utf8'));
         expect(legend).to.not.be.undefined
 
         // Set symbology
