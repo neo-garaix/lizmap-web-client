@@ -1,8 +1,6 @@
 {
   "name": "test",
-  "version": "1.0.0",
-  "description": "Test Lizmap JavaScript",
-  "main": "index.js",
+  "description": "E2E Test Lizmap JavaScript",
   "devDependencies": {
     "@playwright/test": "^1.47.0",
     "cypress": "^9.7.0",

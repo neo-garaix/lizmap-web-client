@@ -1,7 +1,6 @@
 {
   "name": "js-test",
-  "version": "1.0.0",
-  "description": "Test Lizmap JavaScript",
+  "description": "Unit Test Lizmap JavaScript",
   "type": "module",
   "scripts": {
     "js:test": "mocha --recursive node"
