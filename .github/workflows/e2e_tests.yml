@@ -1,9 +1,11 @@
 name: "🎳 End2end"
 on:
+  push:
+    branches:
+      - test-ci-e2e-restruct-package-json
   pull_request:
     types: [ labeled, opened, synchronize, reopened ]
     branches:
-      - test-ci-e2e-restruct-package-json
       - master
       - release_3_*
   workflow_dispatch:
@@ -16,11 +18,6 @@ jobs:
     # The second one when we update the PR with new commits without changing labels
     # The third one when external workflow
     # The fourth one is for the manual button
-    if: |
-      github.event.label.name == 'run end2end' ||
-      contains(github.event.pull_request.labels.*.name, 'run end2end') ||
-      github.event_name == 'repository_dispatch' ||
-      github.event_name == 'workflow_dispatch'
     name: "E2E PHP ${{ matrix.php }} PG  ${{ matrix.pg-postgis }} QGIS ${{ matrix.qgis-server }}"
     runs-on: ubuntu-latest
     defaults:
