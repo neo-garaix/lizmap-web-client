@@ -216,11 +216,10 @@ The `js-units` directory contains some unit tests.
 
 Be sure to have executed `npm install` in the `root project directory` to install Mocha.
 
-You can then go in `js-units` directory and execute:
+You can then go in `root` directory of LWC and execute:
 
 - `npm run js:test` to run the JavaScript unit tests
 
-Or you can execute `npm run js:test --workspace=tests/js-units` from the root project directory.
 
 ## Testing data
 
@@ -233,7 +232,7 @@ You must execute `tests/qgis-projects/tests/load_sql.sh` to populate PostgreSQL 
 The `end2end` directory contains some end-to-end tests made for Cypress and Playwright.
 Be sure to have executed `npm install` in the `root project directory` to install Cypress and Playwright.
 
-Then you can go in the `end2end` directory.
+In order to run tests, you must be in the `root project directory`.
 
 ### Cypress
 
@@ -244,8 +243,6 @@ You can then :
 or
 
 - execute `npm run cy:test` to automatically open Cypress window and run tests in Electron browser.
-
-Or you can execute `npm run cy:open --workspace=tests/end2end`/`npm run cy:test --workspace=tests/end2end` from the root project directory.
 
 You can also use GNU Parallel to parallelize Cypress tests execution on 8 cores for example:
 

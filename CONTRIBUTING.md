@@ -129,19 +129,15 @@ It creates a `node_modules/` directory. Don't commit it into the git repository!
 #### Installation
 
 * Build for production (minified JS files) :
-    * From `assets/` :
-`npm run build`
     * From root directory :
-`npm run build --workspace=assets`
+`npm run build`
 
 Don't commit minified JS files into the git repository. They will be built by our
 continuous integration and added into zip packages that are available on github.
 
 * Build for development (source mapping, build is executed at every change on a JS file) :
-    * From `assets/` :
-`npm run watch`
     * From root directory :
-`npm run watch --workspace=assets`
+`npm run watch`
 
 Look at [webpack documentation](https://webpack.js.org/guides/development/) for other development options (e.g. live reloading)
 
