@@ -12,7 +12,8 @@
   },
   "scripts": {
     "pretest": "eslint assets/src",
-    "pretest-fix": "eslint --fix assets/src"
+    "pretest-fix": "eslint --fix assets/src",
+    "jsdoc": "make version-doc && make js-doc"
   },
   "author": "3Liz",
   "license": "ISC",
