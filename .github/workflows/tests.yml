@@ -3,6 +3,7 @@ name: "🎳 Unit tests"
 on:
   push:
     branches:
+      - test-ci-e2e-restruct-package-json
       - master
       - release_3_*
   pull_request:
@@ -60,4 +61,4 @@ jobs:
         run: npm install
 
       - name: Running tests
-        run: npm run js:test --workspace=tests/js-units
+        run: npm run js:test
