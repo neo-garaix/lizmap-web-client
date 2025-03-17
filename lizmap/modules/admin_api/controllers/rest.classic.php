@@ -74,6 +74,8 @@ class restCtrl extends RestApi {
             }
         }
 
+
+        // @phpstan-ignore-next-line
         $rep->data = $response;
 
         return $rep;

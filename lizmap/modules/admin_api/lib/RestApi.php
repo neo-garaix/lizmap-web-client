@@ -2,10 +2,8 @@
 
 namespace LizmapApi;
 
-use _PHPStan_58d202fdd\Nette\Neon\Exception;
 use jController;
 use jIRestController;
-use LizmapApi\Error;
 
 class RestApi extends jController implements jIRestController {
 
