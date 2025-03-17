@@ -12,6 +12,7 @@ use LizmapAdmin\RepositoryRightsService;
 use LizmapApi\RestApi;
 use LizmapApi\Credentials;
 use LizmapApi\Utils;
+use LizmapApi\Error;
 
 class restCtrl extends RestApi {
 
@@ -28,26 +29,36 @@ class restCtrl extends RestApi {
         $rep = $this->getResponse('json');
 
         if (!Credentials::handle()) {
-            return $this->redirectToErrorPage();
+            return Error::setError($rep, 401);
         }
 
         if ($this->param('repo') != null) {
-            $repo = lizmap::getRepository($this->param('repo'));
 
-            $referer = $this->request->header('Referer');
+            try {
+                $repo = lizmap::getRepository($this->param('repo'));
 
-            $cnx = jDb::getConnection('jacl2_profile');
+                if ($repo == null) {
+                    throw new Exception(code: 404);
+                }
 
-            $rights = RepositoryRightsService::getRights($cnx, $repo->getKey());
+                $referer = $this->request->header('Referer');
 
-            $response = array(
-                'key' => $repo->getKey(),
-                'label' => $repo->getLabel(),
-                'path' => Utils::getRelativePath($repo->getOriginalPath()),
-                'allowUserDefinedThemes' => $repo->getData('allowUserDefinedThemes'),
-                'accessControlAllowOrigin' => $repo->getACAOHeaderValue($referer),
-                'rightsGroup' => $rights,
-            );
+                $cnx = jDb::getConnection('jacl2_profile');
+
+                $rights = RepositoryRightsService::getRights($cnx, $repo->getKey());
+
+                $response = array(
+                    'key' => $repo->getKey(),
+                    'label' => $repo->getLabel(),
+                    'path' => Utils::getRelativePath($repo->getOriginalPath()),
+                    'allowUserDefinedThemes' => $repo->getData('allowUserDefinedThemes'),
+                    'accessControlAllowOrigin' => $repo->getACAOHeaderValue($referer),
+                    'rightsGroup' => $rights,
+                );
+            } catch (Throwable $e) {
+                return Error::setError($rep, $e->getCode());
+            }
+
         } else {
             $listRepo = lizmap::getRepositoryList();
 
@@ -65,18 +76,6 @@ class restCtrl extends RestApi {
 
         $rep->data = $response;
 
-        return $rep;
-    }
-
-    /**
-     * Redirects the user to the predefined error page.
-     *
-     * @return object The response object configured for redirection.
-     */
-    protected function redirectToErrorPage(): object
-    {
-        $rep = $this->getResponse('redirect');
-        $rep->action = "admin_api~error_page:index";
         return $rep;
     }
 }

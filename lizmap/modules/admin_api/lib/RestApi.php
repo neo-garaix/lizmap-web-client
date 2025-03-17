@@ -2,8 +2,10 @@
 
 namespace LizmapApi;
 
+use _PHPStan_58d202fdd\Nette\Neon\Exception;
 use jController;
 use jIRestController;
+use LizmapApi\Error;
 
 class RestApi extends jController implements jIRestController {
 
@@ -18,7 +20,7 @@ class RestApi extends jController implements jIRestController {
     {
         $rep = $this->getResponse('json');
 
-        return ErrorHttp::setError($rep);
+        return Error::setError($rep, 501);
     }
 
     /**
@@ -30,19 +32,19 @@ class RestApi extends jController implements jIRestController {
     {
         $rep = $this->getResponse('json');
 
-        return ErrorHttp::setError($rep);
+        return Error::setError($rep, 501);
     }
 
     function put(){
         $rep = $this->getResponse('json');
 
-        return ErrorHttp::setError($rep);
+        return Error::setError($rep, 501);
     }
 
     function delete(){
         $rep = $this->getResponse('json');
 
-        return ErrorHttp::setError($rep);
+        return Error::setError($rep, 501);
     }
 
 }
