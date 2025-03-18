@@ -11,9 +11,10 @@ class Error {
      *
      * @param object $rep The response object to which the error details will be assigned.
      * @param mixed $errorCode The error code used to identify the error details from the predefined array.
+     * @param string $errorCustomMessage Custom message, for example about specific vars that would be bad written.
      * @return object Returns the updated response object containing the error details.
      */
-    public static function setError(object $rep, mixed $errorCode): object
+    public static function setError(object $rep, mixed $errorCode, string $errorCustomMessage = ''): object
     {
 
         // This structure is made like this id we want to add custom error codes
@@ -26,7 +27,7 @@ class Error {
             ),
             "404" => array(
                 "code" => 404,
-                "message" => "Repository not found. Please provide a valid repository.",
+                "message" => "Resource not found. Please provide a valid entry. ",
                 "http" => true,
             ),
             "501" => array(
@@ -48,7 +49,7 @@ class Error {
 
         $rep->data = array(
             'error code' => $error["code"],
-            'error message' => $error["message"],
+            'error message' => $error["message"].$errorCustomMessage,
         );
 
         return $rep;
