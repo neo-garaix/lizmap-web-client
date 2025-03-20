@@ -1,29 +1,30 @@
 <?php
+
 /**
- * @package   lizmap
- * @subpackage admin_api
  * @author    3liz.com
  * @copyright 2011-2025 3Liz
- * @link      https://3liz.com
+ *
+ * @see      https://3liz.com
+ *
  * @license   https://www.mozilla.org/MPL/ Mozilla Public Licence
  */
 
 use LizmapAdmin\RepositoryRightsService;
-use LizmapApi\RestApi;
 use LizmapApi\Credentials;
-use LizmapApi\Utils;
 use LizmapApi\Error;
+use LizmapApi\RestApiCtrl;
+use LizmapApi\Utils;
 
-class restCtrl extends RestApi {
-
+class repository_restCtrl extends RestApiCtrl
+{
     /**
      * Retrieves repository information and rights based on the provided parameters.
      * If a specific repository is requested, detailed information and user rights are returned.
      * Otherwise, a list of available repositories and their basic information is returned.
      *
-     * @return object A JSON response object containing repository or repositories data and rights if applicable.
+     * @return object a JSON response object containing repository or repositories data and rights if applicable
      */
-    function get(): object
+    public function get(): object
     {
 
         $rep = $this->getResponse('json');
@@ -50,8 +51,8 @@ class restCtrl extends RestApi {
                 $response = array(
                     'key' => $repo->getKey(),
                     'label' => $repo->getLabel(),
-                    'path' => Utils::getRelativePath($repo->getOriginalPath()),
-                    'allowUserDefinedThemes' => $repo->getData('allowUserDefinedThemes'),
+                    'path' => Utils::getLastPartPath($repo->getOriginalPath()),
+                    'allowUserDefinedThemes' => $repo->allowUserDefinedThemes(),
                     'accessControlAllowOrigin' => $repo->getACAOHeaderValue($referer),
                     'rightsGroup' => $rights,
                 );
@@ -64,16 +65,15 @@ class restCtrl extends RestApi {
 
             $response = array();
 
-            for ($i = 0; $i < count($listRepo); $i++) {
+            for ($i = 0; $i < count($listRepo); ++$i) {
                 $repo = lizmap::getRepository($listRepo[$i]);
                 $response[] = array(
                     'key' => $repo->getKey(),
                     'label' => $repo->getLabel(),
-                    'path' => Utils::getRelativePath($repo->getOriginalPath()),
+                    'path' => Utils::getLastPartPath($repo->getOriginalPath()),
                 );
             }
         }
-
 
         // @phpstan-ignore-next-line
         $rep->data = $response;

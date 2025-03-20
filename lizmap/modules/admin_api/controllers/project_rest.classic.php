@@ -11,9 +11,9 @@
 
 use LizmapApi\Credentials;
 use LizmapApi\Error;
-use LizmapApi\RestApi;
+use LizmapApi\RestApiCtrl;
 
-class project_restCtrl extends RestApi
+class project_restCtrl extends RestApiCtrl
 {
     public function get(): object
     {
