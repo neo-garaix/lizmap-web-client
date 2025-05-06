@@ -213,6 +213,11 @@ components:
           type: string
           description: Full user name that did the last save
           example: Jean Jacques
+    Paths:
+      type: array
+      items:
+        type: string
+      example: ["tests/", "demoqgis/", "demoqgis_intranet/"]
   securitySchemes:
     basicAuth:
       type: http
@@ -220,6 +225,26 @@ components:
 security:
   - basicAuth: []
 paths:
+  /admin/paths:
+    get:
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paths'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - basicAuth: [ ]
+      tags:
+        - paths
+      summary: Get all distinct paths
   /admin/repositories:
     get:
       responses:

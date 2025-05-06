@@ -110,5 +110,13 @@ test.describe('Connected',
             expect(json.isCreated).toBeTruthy();
             expect(amountRepoBefore).toEqual(amountRepoAfter - 1);
         });
+
+        test('GET all paths used for repositories', async ({request}) => {
+            const response = await requestGETWithAdminBasicAuth(request, url + "/paths")
+
+            const json = await checkJson(response);
+
+            expect(json.length).toBeGreaterThan(0);
+        });
     }
 );
