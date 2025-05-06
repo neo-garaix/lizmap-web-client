@@ -334,11 +334,31 @@ export async function expectParametersToContain(title, parameters, expectedParam
  * @param {string} url URL to do a GET request on
  * @returns {Promise<import("playwright-core/types/types.js").APIResponse>} Response
  */
-export async function requestWithAdminBasicAuth(request, url) {
+export async function requestGETWithAdminBasicAuth(request, url) {
     return await request.get(url,
         {
             headers: {
                 authorization: 'Basic YWRtaW46YWRtaW4=' // admin:admin
+            }
+        });
+}
+
+/**
+ * Create a POST request on a given URL with Basic authentication admin:admin
+ * @param {import("playwright-core/types/types.js").APIRequestContext} request Request to use
+ * @param {string} url URL to do a POST request on
+ * @returns {Promise<import("playwright-core/types/types.js").APIResponse>} Response
+ */
+export async function requestPOSTWithAdminBasicAuth(request, url) {
+    return await request.post(url,
+        {
+            headers: {
+                authorization: 'Basic YWRtaW46YWRtaW4=' // admin:admin
+            },
+            data: {
+                label: 'New repo',
+                path: "demoqgis/",
+                allowUserDefinedThemes: "false"
             }
         });
 }

@@ -1,6 +1,10 @@
 // @ts-check
 import {expect, test} from '@playwright/test';
-import { checkJson, requestWithAdminBasicAuth } from './globals';
+import {
+    checkJson,
+    requestGETWithAdminBasicAuth,
+    requestPOSTWithAdminBasicAuth
+} from './globals';
 
 const url = 'api.php/admin';
 
@@ -27,7 +31,7 @@ test.describe('Connected',
     }, () => {
 
         test('GET repositories', async ({request}) => {
-            const response = await requestWithAdminBasicAuth(request, url + "/repositories")
+            const response = await requestGETWithAdminBasicAuth(request, url + "/repositories")
 
             const json = await checkJson(response);
 
@@ -37,13 +41,13 @@ test.describe('Connected',
         });
 
         test('GET specific repository wrong key', async ({request}) => {
-            const response = await requestWithAdminBasicAuth(request, url + "/repositories/test")
+            const response = await requestGETWithAdminBasicAuth(request, url + "/repositories/test")
 
             expect(response.status()).toBe(404)
         });
 
         test('GET specific repository good key', async ({request}) => {
-            const response = await requestWithAdminBasicAuth(request, url + "/repositories/testsrepository")
+            const response = await requestGETWithAdminBasicAuth(request, url + "/repositories/testsrepository")
 
             const json = await checkJson(response);
 
@@ -60,7 +64,7 @@ test.describe('Connected',
         });
 
         test('GET all projects from a specific repository', async ({request}) => {
-            const response = await requestWithAdminBasicAuth(request, url + "/repositories/testsrepository/projects")
+            const response = await requestGETWithAdminBasicAuth(request, url + "/repositories/testsrepository/projects")
 
             const json = await checkJson(response);
 
@@ -70,7 +74,7 @@ test.describe('Connected',
         });
 
         test('GET a specific project from a specific repository', async ({request}) => {
-            const response = await requestWithAdminBasicAuth(request, url + "/repositories/testsrepository/projects/attribute_table")
+            const response = await requestGETWithAdminBasicAuth(request, url + "/repositories/testsrepository/projects/attribute_table")
 
             const json = await checkJson(response);
 
@@ -89,6 +93,22 @@ test.describe('Connected',
             expect(json.saveDateTime).toBeDefined();
             expect(json.saveUser).toBeDefined();
             expect(json.saveUserFull).toBeDefined();
+        });
+
+        test('POST request to create a repository', async ({request}) => {
+            const before = await requestGETWithAdminBasicAuth(request, url + "/repositories")
+            const listRepoBefore = await checkJson(before);
+            const amountRepoBefore = listRepoBefore.length;
+
+            const response = await requestPOSTWithAdminBasicAuth(request, url + "/repositories/lyon")
+            const json = await checkJson(response, 201);
+
+            const after = await requestGETWithAdminBasicAuth(request, url + "/repositories")
+            const listRepoAfter = await checkJson(after);
+            const amountRepoAfter = listRepoAfter.length;
+
+            expect(json.isCreated).toBeTruthy();
+            expect(amountRepoBefore).toEqual(amountRepoAfter - 1);
         });
     }
 );

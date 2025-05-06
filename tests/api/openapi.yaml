@@ -295,6 +295,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: allowUserDefinedThemes
+          in: query
+          description: Indicate if user defined themes are allowed
+          required: true
+          schema:
+            type: string
       responses:
         201:
           description: Created
@@ -310,6 +316,18 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         401:
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: Internal Server Error
           content:
             application/json:
               schema:
