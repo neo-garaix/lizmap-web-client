@@ -239,6 +239,17 @@ components:
             type: string
             description: Indicate the owner of the group
             example: null
+    RightsList:
+      type: array
+      items:
+        type: string
+      example: [
+        "lizmap.tools.edition.use",
+        "lizmap.repositories.view",
+        "lizmap.tools.loginFilteredLayers.override",
+        "lizmap.tools.displayGetCapabilitiesLinks",
+        "lizmap.tools.layer.export"
+      ]
   securitySchemes:
     basicAuth:
       type: http
@@ -246,6 +257,26 @@ components:
 security:
   - basicAuth: []
 paths:
+  /admin/rights:
+    get:
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RightsList'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - basicAuth: [ ]
+      tags:
+        - rights
+      summary: Get all rights
   /admin/groups:
     get:
       responses:

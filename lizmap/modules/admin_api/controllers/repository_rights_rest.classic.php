@@ -11,11 +11,31 @@
 
 use LizmapApi\Credentials;
 use LizmapApi\Error;
+use LizmapApi\LizmapRights;
 use LizmapApi\RestApiCtrl;
 use LizmapApi\Utils;
 
 class repository_rights_restCtrl extends RestApiCtrl
 {
+    /**
+     * Retrieves all the rights used in Lizmap Web Client.
+     *
+     * @return object the response object containing data or an error message if credentials are invalid
+     */
+    public function get(): object
+    {
+        /** @var jResponseJson $rep */
+        $rep = $this->getResponse('json');
+
+        if (!Credentials::handle()) {
+            return Error::setError($rep, 401);
+        }
+
+        $rep->data = LizmapRights::getLWCRights();
+
+        return $rep;
+    }
+
     /**
      * Handles the edition of group rules on repositories.
      *

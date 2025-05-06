@@ -126,5 +126,19 @@ test.describe('Connected',
 
             expect(json.length).toBeGreaterThan(0);
         });
+
+        test('GET all rights', async ({request}) => {
+            const response = await requestGETWithAdminBasicAuth(request, url + "/rights")
+
+            const json = await checkJson(response);
+
+            expect(json).toEqual([
+                "lizmap.tools.edition.use",
+                "lizmap.repositories.view",
+                "lizmap.tools.loginFilteredLayers.override",
+                "lizmap.tools.displayGetCapabilitiesLinks",
+                "lizmap.tools.layer.export"
+            ]);
+        });
     }
 );

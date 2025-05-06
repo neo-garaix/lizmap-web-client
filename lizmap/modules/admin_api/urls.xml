@@ -9,5 +9,6 @@
 
     <url pathinfo="/groups" action="group_rest:get"/>
 
+    <url pathinfo="/rights" action="repository_rights_rest:get"/>
     <url pathinfo="/right/:method/:repo" action="repository_rights_rest:get"/>
 </suburls>
