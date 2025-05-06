@@ -118,5 +118,13 @@ test.describe('Connected',
 
             expect(json.length).toBeGreaterThan(0);
         });
+
+        test('GET all groups', async ({request}) => {
+            const response = await requestGETWithAdminBasicAuth(request, url + "/groups")
+
+            const json = await checkJson(response);
+
+            expect(json.length).toBeGreaterThan(0);
+        });
     }
 );

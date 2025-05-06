@@ -218,6 +218,27 @@ components:
       items:
         type: string
       example: ["tests/", "demoqgis/", "demoqgis_intranet/"]
+    Groups:
+      type: array
+      items:
+        type: object
+        properties:
+          id_aclgrp:
+            type: string
+            description: Identification for the group
+            example: intranet
+          name:
+            type: string
+            description: Clean name for the group
+            example: Intranet demos group
+          grouptype:
+            type: string
+            description: Indicate the type of the group
+            example: 0
+          ownerlogin:
+            type: string
+            description: Indicate the owner of the group
+            example: null
   securitySchemes:
     basicAuth:
       type: http
@@ -225,6 +246,26 @@ components:
 security:
   - basicAuth: []
 paths:
+  /admin/groups:
+    get:
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Groups'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - basicAuth: [ ]
+      tags:
+        - groups
+      summary: Get all groups
   /admin/paths:
     get:
       responses:
