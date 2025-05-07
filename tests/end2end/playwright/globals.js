@@ -347,19 +347,33 @@ export async function requestGETWithAdminBasicAuth(request, url) {
  * Create a POST request on a given URL with Basic authentication admin:admin
  * @param {import("playwright-core/types/types.js").APIRequestContext} request Request to use
  * @param {string} url URL to do a POST request on
+ * @param {object} data parameters for the request
  * @returns {Promise<import("playwright-core/types/types.js").APIResponse>} Response
  */
-export async function requestPOSTWithAdminBasicAuth(request, url) {
+export async function requestPOSTWithAdminBasicAuth(request, url, data) {
     return await request.post(url,
         {
             headers: {
                 authorization: 'Basic YWRtaW46YWRtaW4=' // admin:admin
             },
-            data: {
-                label: 'New repo',
-                path: "demoqgis/",
-                allowUserDefinedThemes: "false"
-            }
+            data: data
+        });
+}
+
+/**
+ * Create a DELETE request on a given URL with Basic authentication admin:admin
+ * @param {import("playwright-core/types/types.js").APIRequestContext} request Request to use
+ * @param {string} url URL to do a DELETE request on
+ * @param {object} data parameters for the request
+ * @returns {Promise<import("playwright-core/types/types.js").APIResponse>} Response
+ */
+export async function requestDELETEWithAdminBasicAuth(request, url, data) {
+    return await request.delete(url,
+        {
+            headers: {
+                authorization: 'Basic YWRtaW46YWRtaW4=' // admin:admin
+            },
+            data: data
         });
 }
 /* eslint-enable jsdoc/check-types */

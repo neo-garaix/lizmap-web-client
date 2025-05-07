@@ -3,7 +3,8 @@ import {expect, test} from '@playwright/test';
 import {
     checkJson,
     requestGETWithAdminBasicAuth,
-    requestPOSTWithAdminBasicAuth
+    requestPOSTWithAdminBasicAuth,
+    requestDELETEWithAdminBasicAuth
 } from './globals';
 
 const url = 'api.php/admin';
@@ -100,7 +101,15 @@ test.describe('Connected',
             const listRepoBefore = await checkJson(before);
             const amountRepoBefore = listRepoBefore.length;
 
-            const response = await requestPOSTWithAdminBasicAuth(request, url + "/repositories/lyon")
+            const response = await requestPOSTWithAdminBasicAuth(
+                request,
+                url + "/repositories/lyon",
+                {
+                    label: 'New repo',
+                    path: "demoqgis/",
+                    allowUserDefinedThemes: "false"
+                }
+            )
             const json = await checkJson(response, 201);
 
             const after = await requestGETWithAdminBasicAuth(request, url + "/repositories")
@@ -139,6 +148,52 @@ test.describe('Connected',
                 "lizmap.tools.displayGetCapabilitiesLinks",
                 "lizmap.tools.layer.export"
             ]);
+        });
+
+        test('ADD (POST) and DELETE a specific right on a repository for a group', async ({request}) => {
+            const createRepo = await requestPOSTWithAdminBasicAuth(
+                request,
+                url + "/repositories/nancy",
+                {
+                    label: 'Test repo',
+                    path: "demoqgis/",
+                    allowUserDefinedThemes: "false"
+                }
+            )
+            await checkJson(createRepo, 201);
+
+            const addRight = await requestPOSTWithAdminBasicAuth(
+                request,
+                url + "/rights/nancy",
+                {
+                    group: 'admins',
+                    right: 'lizmap.tools.edition.use'
+                }
+            )
+            await checkJson(addRight);
+
+            let response = await requestGETWithAdminBasicAuth(request, url + "/repositories/nancy")
+            let json = await checkJson(response);
+
+
+            expect(json.rightsGroup["lizmap.tools.edition.use"]).toEqual(["admins"]);
+
+
+            const deleteRight = await requestDELETEWithAdminBasicAuth(
+                request,
+                url + "/rights/nancy",
+                {
+                    group: 'admins',
+                    right: 'lizmap.tools.edition.use'
+                }
+            )
+            await checkJson(deleteRight, 200);
+
+            response = await requestGETWithAdminBasicAuth(request, url + "/repositories/nancy")
+            json = await checkJson(response);
+
+
+            expect(json.rightsGroup["lizmap.tools.edition.use"]).toBeUndefined();
         });
     }
 );
