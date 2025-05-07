@@ -251,7 +251,7 @@ export async function expectToHaveLengthCompare(title, parameters, expectedLengt
  * @returns {Promise<any>} The JSON response
  */
 export async function jsonFromProjectApi(request, project, repository = 'testsrepository') {
-    return await requestWithAdminBasicAuth(
+    return await requestGETWithAdminBasicAuth(
         request,
         `/api.php/admin/repositories/${repository}/projects/${project}`
     );

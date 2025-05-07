@@ -72,6 +72,7 @@ class repository_rights_restCtrl extends RestApiCtrl
      */
     public function post(): object
     {
+        /** @var jResponseJson $rep */
         $rep = $this->getResponse('json');
 
         if (!Credentials::handle()) {
@@ -114,6 +115,7 @@ class repository_rights_restCtrl extends RestApiCtrl
      */
     public function delete(): object
     {
+        /** @var jResponseJson $rep */
         $rep = $this->getResponse('json');
 
         if (!Credentials::handle()) {

@@ -113,6 +113,7 @@ class repository_restCtrl extends RestApiCtrl
      */
     public function post(): object
     {
+        /** @var jResponseJson $rep */
         $rep = $this->getResponse('json');
 
         if (!Credentials::handle()) {
